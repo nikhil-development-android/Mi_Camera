@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Baseline dimens used across layouts to make UI responsive -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+
+    <dimen name="control_button_size">56dp</dimen>
+    <dimen name="shutter_outer_size">84dp</dimen>
+    <dimen name="shutter_inner_size">64dp</dimen>
+
+    <dimen name="mode_text_size">14sp</dimen>
+    <dimen name="mode_item_padding">12dp</dimen>
+
+    <dimen name="bottom_panel_height">120dp</dimen>
+    <dimen name="bottom_control_lower_panel_height">96dp</dimen>
+</resources>
