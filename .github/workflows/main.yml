@@ -1,28 +1,39 @@
-steps:
-  - name: Checkout
-    uses: actions/checkout@v4
+name: Build MiuiCamera APK
 
-  - name: Set up Java 11
-    uses: actions/setup-java@v4
-    with:
-      distribution: 'temurin'
-      java-version: '11'
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [port-fixes, main]
 
-  - name: Show directory
-    run: dir
+jobs:
+  build:
+    runs-on: windows-latest
 
-  - name: Build APK with build.bat
-    working-directory: App
-    run: |
-      echo Running build.bat non-interactively
-      echo 1|build.bat
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - name: List output
-    run: |
-      dir App\out || echo "out folder not present"
+      - name: Set up Java 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
 
-  - name: Upload APK artifact
-    uses: actions/upload-artifact@v4
-    with:
-      name: MiuiCamera-apk
-      path: App/out/*.apk
+      - name: Show directory
+        run: dir
+
+      - name: Build APK with build.bat
+        working-directory: App
+        run: |
+          echo Running build.bat non-interactively
+          echo 1|build.bat
+
+      - name: List output
+        run: |
+          dir App\out || echo "out folder not present"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MiuiCamera-apk
+          path: App/out/*.apk
