@@ -10,27 +10,49 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Java 11
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: Show directory
-        run: dir
-
-      - name: Build APK with build.bat
-        working-directory: App
+      - name: Ensure out folder
+        shell: pwsh
         run: |
-          echo Running build.bat non-interactively
-          echo 1|build.bat
+          if (-not (Test-Path -Path "App\out")) { New-Item -ItemType Directory -Path "App\out" | Out-Null }
 
-      - name: List output
+      - name: Download apktool (Windows)
+        shell: pwsh
         run: |
-          dir App\out || echo "out folder not present"
+          Write-Host "Downloading apktool scripts..."
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/windows/apktool.bat" -OutFile "apktool.bat"
+          Invoke-WebRequest -Uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar" -OutFile "apktool.jar"
+          # Ensure apktool.bat can find jar
+          if (Test-Path apktool*.jar) { Move-Item -Force apktool*.jar apktool.jar }
+
+      - name: Build app with apktool
+        shell: pwsh
+        run: |
+          Write-Host "Building with apktool..."
+          # change to application dir if paths in your repo expect it
+          .\apktool.bat b .\App\application -f
+          # move dist output if exists
+          if (Test-Path ".\App\application\dist\MiuiCamera.apk") {
+            Move-Item -Force ".\App\application\dist\MiuiCamera.apk" ".\App\out\MiuiCamera.apk"
+            Write-Host "APK moved to App\\out\\MiuiCamera.apk"
+          } else {
+            Write-Error "Built APK not found in .\\App\\application\\dist\\MiuiCamera.apk"
+            exit 1
+          }
+
+      - name: List output folder
+        shell: pwsh
+        run: |
+          Write-Host "Contents of App\\out:"
+          Get-ChildItem -Path App\out -Recurse | Format-Table
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
