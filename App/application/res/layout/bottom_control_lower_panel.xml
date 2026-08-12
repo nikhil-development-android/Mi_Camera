@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.camera.ui.BottomControlLowerPanel
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/bottom_control_lower_panel"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_control_lower_panel_height"
+    android:layout_centerVertical="true"
+    android:paddingStart="@dimen/margin_medium"
+    android:paddingEnd="@dimen/margin_medium">
+
+    <!-- Thumbnail / gallery button -->
+    <com.android.camera.ui.V6ThumbnailButton
+        android:id="@id/v6_thumbnail_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/mode_item_padding"
+        android:focusable="false"
+        android:clickable="true">
+
+        <com.android.camera.ui.RotateImageView
+            android:id="@id/v6_thumbnail_image"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_t"
+            android:contentDescription="@string/thumbnail"/>
+    </com.android.camera.ui.V6ThumbnailButton>
+
+    <!-- Shutter centered -->
+    <com.android.camera.ui.V6ShutterButton
+        android:id="@id/v6_shutter_button"
+        android:layout_width="@dimen/shutter_outer_size"
+        android:layout_height="@dimen/shutter_outer_size"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_small"
+        android:focusable="false">
+
+        <com.android.camera.ui.V6ShutterButtonAudioSound
+            android:id="@id/v6_shutter_button_audio_sound"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"/>
+
+        <com.android.camera.ui.V6ShutterButtonInternal
+            android:id="@id/v6_shutter_button_internal"
+            android:layout_width="@dimen/shutter_inner_size"
+            android:layout_height="@dimen/shutter_inner_size"
+            android:layout_centerInParent="true"
+            android:clickable="true"/>
+    </com.android.camera.ui.V6ShutterButton>
+
+    <!-- Module picker / mode strip (right side) -->
+    <com.android.camera.ui.V6ModulePicker
+        android:id="@id/v6_module_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/mode_item_padding"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_alignParentEnd="true"/>
+</com.android.camera.ui.BottomControlLowerPanel>

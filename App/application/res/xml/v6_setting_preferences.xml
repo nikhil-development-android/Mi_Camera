@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Modes">
+        <SwitchPreferenceCompat
+            android:key="pref_watermark"
+            android:title="Watermark"
+            android:summary="Add watermark to photos"
+            android:defaultValue="false"/>
+        <SwitchPreferenceCompat
+            android:key="pref_smart_suggestions"
+            android:title="Smart suggestions"
+            android:summary="Show smart tips while shooting"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="General settings">
+        <ListPreference
+            android:key="pref_volume_function"
+            android:title="Volume buttons function"
+            android:entries="@array/volume_button_entries"
+            android:entryValues="@array/volume_button_values"
+            android:defaultValue="timer"/>
+        <SwitchPreferenceCompat
+            android:key="pref_save_location"
+            android:title="Save location info"
+            android:defaultValue="true"/>
+        <SwitchPreferenceCompat
+            android:key="pref_shutter_sound"
+            android:title="Shutter sound"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Advanced">
+        <SwitchPreferenceCompat
+            android:key="pref_preserve_settings"
+            android:title="Preserve settings"
+            android:summary="Keep last used mode instead of resetting"
+            android:defaultValue="true"/>
+        <ListPreference
+            android:key="pref_antibanding"
+            android:title="Anti banding"
+            android:entries="@array/antibanding_entries"
+            android:entryValues="@array/antibanding_values"
+            android:defaultValue="50hz"/>
+    </PreferenceCategory>
+</PreferenceScreen>
